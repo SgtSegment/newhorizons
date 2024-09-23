@@ -11,12 +11,14 @@ import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 
+
+import PlayerState.hx;
+
 //#endregion
 
 class PlayState extends FlxState
 {
 //#region vars
-    var isMoving:Bool = false; // Add this line to track if the player is moving
     var shouldUpdateIdleDirection:Bool = false;
     var currentDirection:String = "idle_N"; // Default idle direction
     var mouseMovedSinceStop:Bool = false;
@@ -26,14 +28,6 @@ class PlayState extends FlxState
     private var lastMouseX:Float = FlxG.mouse.x;
     private var lastMouseY:Float = FlxG.mouse.y;
     var newSittingDirection:String;
-    var isSitting:Bool = false;
-    var isDancing:Bool = false;
-    var isWaving:Bool = false;
-    var waveTimer:Float = 0;
-    var waveDuration:Float = 1.33;
-    var isSoftSitting:Bool = false;    
-    var isIdleDirection:Bool = false; // Track if the player is in an idle direction
-    var sittingDirection:String = "idle_S"; // Default sitting direction
     var background00:FlxSprite;
     var background00a:FlxSprite;
     var background00b:FlxSprite;
@@ -320,7 +314,7 @@ class PlayState extends FlxState
 //        var button = new FlxButton((1440/2), 675, "Sky switch", onButtonClicked);
 //        add(button);
 //#endregion
-          
+
     }
 
 //#region bg button code
@@ -486,7 +480,6 @@ class PlayState extends FlxState
             return; // Exit early to prevent movement
         }
         
-              
     
         // Handle sitting and soft sitting logic (remains the same)
         if (isSitting || isSoftSitting) {
@@ -565,9 +558,7 @@ class PlayState extends FlxState
                     targetCircle.alpha = 1;
                 }
 
-                // Ensure the mouse click is within the bounds of the collision graphic
-                if (localX >= 0 && localY >= 0 && localX < playerClickCollision.width && localY < playerClickCollision.height) {
-                    // Get the color of the pixel at the mouse position in the collision graphic
+                // Ensure the mouse click is within the b﻿e mouse position in the collision graphic
                     var pixelColor:Int = playerClickCollision.pixels.getPixel(Std.int(localX), Std.int(localY));
                 
                     // Check if the clicked pixel is green (#00FF00)
@@ -590,11 +581,7 @@ class PlayState extends FlxState
         playerName.y = player.y + 150;
 
         renderGroup.members.sort(orderByY);
-    
-        // Remove the redundant call to updateIdleAnimation() //if (!isMoving) {
-        //    updateIdleAnimation();
-        //}
-    }
+    ﻿
 
     // Function to calculate and update the idle animation based on mouse position
     function updateIdleAnimation():Void {
@@ -658,11 +645,7 @@ class PlayState extends FlxState
     
         if (roundedAngle >= 337 || roundedAngle < 22) {
             if (player.animation.curAnim.name == currentDirection) {
-                newSittingDirection = "sit_E_ifidle";
-            } else { newSittingDirection = "sit_E"; }
-        } else if (roundedAngle >= 22 && roundedAngle < 67) {
-            if (player.animation.curAnim.name == currentDirection) {
-                newSittingDirection = "sit_NE_ifidle";
+                newSittingDirection = "sit_E_ifi﻿fidle";
             } else { newSittingDirection = "sit_NE"; }
         } else if (roundedAngle >= 67 && roundedAngle < 112) {
             if (player.animation.curAnim.name == currentDirection) {
@@ -702,7 +685,6 @@ class PlayState extends FlxState
         // Do nothing if the direction is the same and forcePlay is false to prevent animation restart
     }
     
-       
     // Function to sort objects by Y value for draw order
     private function orderByY(a:FlxBasic, b:FlxBasic):Int {
         var spriteA:FlxSprite = cast a;
@@ -718,11 +700,7 @@ class PlayState extends FlxState
     }
     
     // Function to handle movement and animations when the player is walking
-    private function movePlayer(elapsed:Float):Void {
-        var direction:FlxPoint = new FlxPoint(target.x - player.x, target.y - player.y);
-        var distance:Float = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
-    
-        // Define the minimum distance for fade out to begin
+    private function movePlayer(elapsed:Float):V﻿ out to begin
         var fadeOutDistance:Float = 105;
         
         // Define a multiplier to make the fade out happen faster
@@ -742,18 +720,7 @@ class PlayState extends FlxState
             }
         }
 
-        if (distance < speed * elapsed) {
-            player.x = target.x;
-            player.y = target.y;
-            targetCircle.visible = false; // Ensure it's hidden when the player reaches the target
-            isMoving = false;             // Player stops moving
-    
-            // Reset mouseMovedSinceStop flag
-            mouseMovedSinceStop = false;
-    
-            // Do NOT update lastMouseX and lastMouseY here
-    
-            return;
+        if (distance < speed * elapsed) {﻿
         }
     
         direction.normalize();
@@ -767,7 +734,7 @@ class PlayState extends FlxState
         // Determine walking animation and update currentDirection
         if (moveAngle >= 337.5 || moveAngle < 22.5) {
             player.animation.play("walk_E");
-            currentDirection = "idle_E";
+            currentDirection = "idle_E";﻿
         } else if (moveAngle >= 22.5 && moveAngle < 67.5) {
             player.animation.play("walk_NE");
             currentDirection = "idle_NE";
@@ -791,4 +758,3 @@ class PlayState extends FlxState
             currentDirection = "idle_SE";
         }
     }   
-}
