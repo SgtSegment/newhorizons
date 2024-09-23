@@ -28,14 +28,6 @@ class PlayState extends FlxState
     private var lastMouseX:Float = FlxG.mouse.x;
     private var lastMouseY:Float = FlxG.mouse.y;
     var newSittingDirection:String;
-    var isSitting:Bool = false;
-    var isDancing:Bool = false;
-    var isWaving:Bool = false;
-    var waveTimer:Float = 0;
-    var waveDuration:Float = 1.33;
-    var isSoftSitting:Bool = false;    
-    var isIdleDirection:Bool = false; // Track if the player is in an idle direction
-    var sittingDirection:String = "idle_S"; // Default sitting direction
     var background00:FlxSprite;
     var background00a:FlxSprite;
     var background00b:FlxSprite;
@@ -322,7 +314,7 @@ class PlayState extends FlxState
 //        var button = new FlxButton((1440/2), 675, "Sky switch", onButtonClicked);
 //        add(button);
 //#endregion
-          
+
     }
 
 //#region bg button code
@@ -488,7 +480,6 @@ class PlayState extends FlxState
             return; // Exit early to prevent movement
         }
         
-              
     
         // Handle sitting and soft sitting logic (remains the same)
         if (isSitting || isSoftSitting) {
