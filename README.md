@@ -1,4 +1,4 @@
-#Instructions 
+# Instructions 
 Set up HaxeFlixel https://haxeflixel.com/documentation/getting-started/
 
 Install git https://git-scm.com/downloads
