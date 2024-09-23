@@ -2,6 +2,11 @@ package source;
 
 import flixel;
 
-class UserInterface{
+class UserInterface {
 
+        
+
+    function drawInterface(){
+        
+    }
 }

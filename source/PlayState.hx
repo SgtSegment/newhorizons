@@ -19,7 +19,6 @@ import PlayerState.hx;
 class PlayState extends FlxState
 {
 //#region vars
-    var isMoving:Bool = false; // Add this line to track if the player is moving
     var shouldUpdateIdleDirection:Bool = false;
     var currentDirection:String = "idle_N"; // Default idle direction
     var mouseMovedSinceStop:Bool = false;
