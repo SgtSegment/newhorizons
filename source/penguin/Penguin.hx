@@ -25,6 +25,9 @@ class Penguin {
 
     // Sprite state.
     private var penguinSprite: FlxSprite;
+    private var penguinGraphic: FlxGraphic;
+    private var penguinFrames: FlxAtlasFrames;
+
     private var sprites: Array<FlxSprite>;
 
     // Text state.
@@ -73,22 +76,27 @@ class Penguin {
 
     // Action setters.
     public function setIdle(direction: CardinalDirection) {
+        trace('Idle');
         currentAction = Idle(direction);
         actionJustChanged = true;
     }
     public function setMoving(goalX: Float, goalY: Float) {
-        currentAction = Moving(new FlxPoint(goalX, goalY));
+        trace('Moving');
+        currentAction = Moving(FlxPoint.get(goalX, goalY));
         actionJustChanged = true;
     }
     public function setSitting(direction: CardinalDirection) {
+        trace('Sitting');
         currentAction = Sitting(direction);
         actionJustChanged = true;
     }
     public function setDancing() {
+        trace('Dancing');
         currentAction = Dancing;
         actionJustChanged = true;
     }
     public function setWaving(waveTimer: Float = 0) {
+        trace('Waving');
         currentAction = Waving(waveTimer);
         actionJustChanged = true;
     }
@@ -108,7 +116,7 @@ class Penguin {
             }
     }
     private function updateMoving(elapsed: Float, goal: FlxPoint): Void {
-        var direction: FlxPoint = new FlxPoint(goal.x - penguinSprite.x, goal.y - penguinSprite.y);
+        var direction: FlxPoint = FlxPoint.get(goal.x - penguinSprite.x, goal.y - penguinSprite.y);
         var distance: Float = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
 
         var fadeOutDistance:Float = 105;
@@ -187,20 +195,21 @@ class Penguin {
         waveTimer += elapsed;
         if (waveTimer >= waveDuration) {
             setIdle(South);
+            return;
         }
 
-        setWaving(waveTimer);
+        currentAction = Waving(waveTimer);
     }
 
     // Load the penguin sprite related stuff.
     private function loadPenguinSprite(X: Float, Y: Float) {
         // Load the texture atlas
-        var graphic:FlxGraphic = FlxG.bitmap.add("assets/images/player/penguinSprite.png");
-        var frames:FlxAtlasFrames = FlxAtlasFrames.fromTexturePackerJson(graphic, "assets/images/player/penguinSprite.json");
+        penguinGraphic = FlxG.bitmap.add("assets/images/player/penguinSprite.png");
+        penguinFrames = FlxAtlasFrames.fromTexturePackerJson(penguinGraphic, "assets/images/player/penguinSprite.json");
 
-        penguinSprite = new FlxSprite(130, 120);
-        trace('penguin sprite', penguinSprite);
-        penguinSprite.frames = frames;
+        penguinSprite = new FlxSprite(X, Y);
+        penguinSprite.frames = penguinFrames; // Set the frames from your atlas //player.loadGraphic("assets/images/player.png");
+        //player.animation.addByPrefix("idle", "0_idle", 12, true); // '0_idle' is the prefix common in all frames
 
         penguinSprite.animation.add("idle_N", [0], 0, false);
         penguinSprite.animation.add("idle_NW", [1], 0, false);
@@ -211,13 +220,13 @@ class Penguin {
         penguinSprite.animation.add("idle_E", [6], 0, false);
         penguinSprite.animation.add("idle_NE", [7], 0, false);
 
-        penguinSprite.animation.add("walk_N", [8, 9, 10, 11, 12, 13, 14, 15], 13, true);
-        penguinSprite.animation.add("walk_NW", [16, 17, 18, 19, 20, 21, 22, 23], 13, true);
-        penguinSprite.animation.add("walk_W", [24, 25, 26, 27, 28, 29, 30, 31], 13, true);
-        penguinSprite.animation.add("walk_SW", [32, 33, 34, 35, 36, 37, 38, 39], 13, true);
-        penguinSprite.animation.add("walk_S", [40, 41, 42, 43, 44, 45, 46, 47], 13, true);
-        penguinSprite.animation.add("walk_SE", [48, 49, 50, 51, 52, 53, 54, 55], 13, true);
-        penguinSprite.animation.add("walk_E", [56, 57, 58, 59, 60, 61, 62, 63], 13, true);
+        penguinSprite.animation.add("walk_N", [8, 9, 10, 11, 12, 13, 14, 15], 13, true); 
+        penguinSprite.animation.add("walk_NW", [16, 17, 18, 19, 20, 21, 22, 23], 13, true); 
+        penguinSprite.animation.add("walk_W", [24, 25, 26, 27, 28, 29, 30, 31], 13, true); 
+        penguinSprite.animation.add("walk_SW", [32, 33, 34, 35, 36, 37, 38, 39], 13, true); 
+        penguinSprite.animation.add("walk_S", [40, 41, 42, 43, 44, 45, 46, 47], 13 true); 
+        penguinSprite.animation.add("walk_SE", [48, 49, 50, 51, 52, 53, 54, 55], 13, true); 
+        penguinSprite.animation.add("walk_E", [56, 57, 58, 59, 60, 61, 62, 63], 13, true); 
         penguinSprite.animation.add("walk_NE", [64, 65, 66, 67, 68, 69, 70, 71], 13, true);
 
         penguinSprite.animation.add("sit_N", [398,72], 13, false);

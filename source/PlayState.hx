@@ -181,7 +181,6 @@ class PlayState extends FlxState
         renderGroup.add(background08);
         renderGroup.add(background06);
         renderGroup.add(penguin.getPenguinSprite());
-        trace('Penguin Sprite', penguin.getPenguinSprite());
         
         // Add the group to the state so it can be updated and rendered
         add(renderGroup);
