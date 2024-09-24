@@ -33,6 +33,9 @@ class Penguin {
     // Constants.
     private final speed: Float = 200;
     private final waveDuration: Float = 1.33;
+    private final fadeOutDistance: Float = 105;
+    private final fadeMultiplier: Float = 3;
+
 
     // Constructor
     public function new(X: Float = 0, Y: Float = 0) {
@@ -55,7 +58,7 @@ class Penguin {
 
         var textWidth: Float = penguinName.width;
         penguinName.x = penguinSprite.x - (textWidth / 2) + (penguinSprite.width / 2);
-        penguinName.y = penguinSprite.y - (textWidth / 2) + (penguinSprite.height / 2);
+        penguinName.y = penguinSprite.y + 150;
     }
 
     // Sprite getters.
@@ -115,15 +118,13 @@ class Penguin {
     private function updateMoving(elapsed: Float, goal: FlxPoint): Void {
         var direction: FlxPoint = FlxPoint.get(goal.x - penguinSprite.x, goal.y - penguinSprite.y);
         var distance: Float = Math.sqrt(direction.x * direction.x + direction.y * direction.y);
-
-        var fadeOutDistance:Float = 105;
-        var fadeMultiplier:Float = 3;
+        var moveAngle: Float = Math.atan2(direction.y, direction.x) * (180 / Math.PI);
 
         // Check if penguin will be past goal.
         if (distance < speed * elapsed) {
             penguinSprite.x = goal.x;
             penguinSprite.y = goal.y;
-            setIdle(South); // TODO(mvh): decide on the direction based on the direction vector.
+            setIdle(angleToDirection(moveAngle)); // TODO(mvh): decide on the direction based on the direction vector.
             return;
         }
 
@@ -131,41 +132,16 @@ class Penguin {
         penguinSprite.x += direction.x * speed * elapsed;
         penguinSprite.y += direction.y * speed * elapsed;
 
-        var moveAngle: Float = Math.atan2(direction.y, direction.x) * (180 / Math.PI);
-        if (moveAngle < 0) moveAngle += 360;
-
         // Determine walking animation and update currentDirection
-        if (moveAngle >= 337.5 || moveAngle < 22.5) {
-            penguinSprite.animation.play("walk_E");
-            return;
-        }
-        if (moveAngle >= 22.5 && moveAngle < 67.5) {
-            penguinSprite.animation.play("walk_NE");
-            return;
-        }
-        if (moveAngle >= 67.5 && moveAngle < 112.5) {
-            penguinSprite.animation.play("walk_N");
-            return;
-        }
-        if (moveAngle >= 112.5 && moveAngle < 157.5) {
-            penguinSprite.animation.play("walk_NW");
-            return;
-        }
-        if (moveAngle >= 157.5 && moveAngle < 202.5) {
-            penguinSprite.animation.play("walk_W");
-            return;
-        }
-        if (moveAngle >= 202.5 && moveAngle < 247.5) {
-            penguinSprite.animation.play("walk_SW");
-            return;
-        }
-        if (moveAngle >= 247.5 && moveAngle < 292.5) {
-            penguinSprite.animation.play("walk_S");
-            return;
-        }
-        if (moveAngle >= 292.5 && moveAngle < 337.5) {
-            penguinSprite.animation.play("walk_SE");
-            return;
+        switch (angleToDirection(moveAngle)) {
+            case North:     penguinSprite.animation.play("walk_N");
+            case NorthEast: penguinSprite.animation.play("walk_NE");
+            case East:      penguinSprite.animation.play("walk_E");
+            case SouthEast: penguinSprite.animation.play("walk_SE");
+            case South:     penguinSprite.animation.play("walk_S");
+            case SouthWest: penguinSprite.animation.play("walk_SW");
+            case West:      penguinSprite.animation.play("walk_W");
+            case NorthWest: penguinSprite.animation.play("walk_NW");
         }
     }
     private function updateSitting(elapsed: Float, direction: CardinalDirection): Void {
@@ -262,5 +238,21 @@ class Penguin {
     private function loadPenguinName() {
         penguinName = new FlxText(0, 0, 0, "Penguin", 18);
         penguinName.setFormat("Arial", 24, 0x000000, "center"); // Black color
+    }
+
+    private function angleToDirection(angle: Float): CardinalDirection {
+        if (angle < 0) angle += 360;
+
+        // Determine walking animation and update currentDirection
+        if (angle >= 337.5 || angle < 22.5) return East;
+        if (angle >= 22.5 && angle < 67.5) return NorthEast;
+        if (angle >= 67.5 && angle < 112.5) return North;
+        if (angle >= 112.5 && angle < 157.5) return NorthWest;
+        if (angle >= 157.5 && angle < 202.5) return West;
+        if (angle >= 202.5 && angle < 247.5) return SouthWest;
+        if (angle >= 247.5 && angle < 292.5) return South;
+        //if (angle >= 292.5 && angle < 337.5) {
+            return SouthEast;
+        //}
     }
 }
