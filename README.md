@@ -11,4 +11,4 @@ Navigate to it `cd newhorizons`
 Test it `lime test html5`, add `-debug` to have debug tools when pressing F2
 
 ### Discord
-https://discord.gg/fte4exKHkW
+(Temporarily paused)
