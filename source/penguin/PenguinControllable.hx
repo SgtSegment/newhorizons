@@ -49,15 +49,17 @@ class PenguinControllable extends Penguin {
             targetSprite.y = goalY - targetSprite.origin.y;
             targetSprite.visible = true;
             targetSprite.alpha = 1;
+            var targetX: Float = goalX - penguinSprite.origin.x;
+            var targetY: Float = goalY - penguinSprite.origin.y;
 
-            super.setMoving(goalX, goalY);
+            super.setMoving(targetX, targetY);
         }
     }
 
     // Handle keyboard input.
     private function handleInput(): Void {
         if (FlxG.keys.justPressed.W) setWaving();
-        if (FlxG.keys.justPressed.S) setSitting(South);
+        if (FlxG.keys.justPressed.S) setSitting(North);
         if (FlxG.keys.justPressed.D) setDancing();
         if (FlxG.mouse.justPressed) setMoving(FlxG.mouse.x, FlxG.mouse.y);
     }
