@@ -24,268 +24,39 @@
 	</script>
 	
 	<style>
-		html, body {
-			margin: 0;
-			padding: 0;
-			height: 100%;
-			width: 100%;
-			overflow: hidden;
-			background-color: #ffffff; /* White background color */
-			display: flex;
-			flex-direction: column;
+		html,body { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+		#openfl-content { width: 100%; height: 100%; }
+		@font-face {
+			font-family: 'Nokia Cellphone FC Small';
+			src: url('flixel/fonts/nokiafc22.eot?#iefix') format('embedded-opentype'),
+			url('flixel/fonts/nokiafc22.woff') format('woff'),
+			url('flixel/fonts/nokiafc22.ttf') format('truetype'),
+			url('flixel/fonts/nokiafc22.svg#Nokia%20Cellphone%20FC%20Small') format('svg');
+			font-weight: normal;
+			font-style: normal;
 		}
-		
-		#openfl-content {
-			width: 100%;
-			height: 100%;
-			position: absolute;
-			top: 0;
-			left: 0;
-			/* Keeping original styles */
-			
-			height: 100%;
+		@font-face {
+			font-family: 'Monsterrat';
+			src: url('flixel/fonts/monsterrat.eot?#iefix') format('embedded-opentype'),
+			url('flixel/fonts/monsterrat.woff') format('woff'),
+			url('flixel/fonts/monsterrat.ttf') format('truetype'),
+			url('flixel/fonts/monsterrat.svg#Monsterrat') format('svg');
+			font-weight: normal;
+			font-style: normal;
 		}
-		
-		/* Custom Header Styles */
-		.header {
-			width: 100%;
-			height: 35px; /* Header height */
-			background: linear-gradient(
-				to bottom,
-				#005399 0%,
-				#005399 33%,
-				#00549A 34%,
-				#01559B 36%,
-				#02569D 39%,
-				#02589E 42%,
-				#0359A0 45%,
-				#045BA2 48%,
-				#055CA4 51%,
-				#065EA6 54%,
-				#065FA7 57%,
-				#0761A9 60%,
-				#0862AA 63%,
-				#0863AC 66%,
-				#0964AD 69%,
-				#0964AD 71%,
-				#014A86 75%,
-				#014984 78%,
-				#014379 81%,
-				#D2D9DC 84%,
-				#DDE2E4 87%,
-				#EEF1F2 90%,
-				#F9FAFA 93%,
-				#FFFFFF 100%
-			);
-			display: flex;
-			justify-content: center; /* Center the inner content horizontally */
-			align-items: center; /* Center the inner content vertically */
-			box-sizing: border-box;
-			padding: 0;
-			position: relative;
-			z-index: 10;
-		}
-		
-		.header-content {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			width: 800px; /* Fixed width for the content */
-			height: 100%; /* Ensure it takes full height of header */
-			box-sizing: border-box;
-			padding: 0 10px; /* Add horizontal padding */
-			margin: 0;
-			line-height: 30px; /* Adjust line height to move text up */
-			position: relative;
-			top: -3px; /* Adjust this value to move the text up */
-		}
-		
-		.header .links {
-			display: flex;
-			align-items: center;
-		}
-		
-		.header .links a {
-			color: #ffffff; /* White text color */
-			text-decoration: none;
-			font-size: 11px; /* Font size */
-			font-weight: 600; /* Font weight */
-			padding: 0 10px; /* Adjust padding for spacing */
-			position: relative;
-			font-family: Arial, sans-serif; /* Ensure font is Arial */
-		}
-		
-		.header .links a:not(:last-child)::after {
-			content: '';
-			position: absolute;
-			right: 0; /* Move the vertical bar closer to the text */
-			top: 50%;
-			transform: translateY(-50%);
-			width: 1px; /* Width of the vertical bar */
-			height: 15px; /* Height of the vertical bar */
-			background-color: #FFA500; /* Orange vertical bar color */
-		}
-		
-		.header .buttons {
-			display: flex;
-			align-items: center;
-			gap: 10px; /* Space between buttons */
-		}
-		
-		.header button {
-			background-color: #0280CD;
-			border: none;
-			color: white;
-			padding: 2px 6px; /* Smaller padding */
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 11px; /* Font size */
-			font-weight: 600; /* Font weight */
-			cursor: pointer;
-			border-radius: 5px;
-		}
-		
-		.header button:hover {
-			background-color: #0280CD;
-		}
-		
-		.container {
-			width: 100%;
-			height: calc(100% - 35px); /* Adjusted to fit the header height */
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			position: relative;
-		}
-		
-		.game-wrapper {
-			width: 100%;
-			height: 100%;
-			max-width: 1440px;
-			max-height: 900px;
-			position: relative;
-			/* background: url(/assets/images/corebackground.png); */
-		}
-		
-		/* Include original font-face styles if needed */
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-		
-			
-				
-					cssFontFace
-				
-			
-		
-			
-				
-					cssFontFace
-				
-			
-		
-			
-		
-			
-		
-			
-		
+
 	</style>
 	
 </head>
 <body>
+	
 	<noscript>This webpage makes extensive use of JavaScript. Please enable JavaScript in your web browser to view this page.</noscript>
-	<div class="header">
-        <div class="header-content">
-            <div class="links">
-                <a href="#">Website Home</a>
-                <a href="#">Community</a>
-                <a href="#">Support</a>
-                <a href="#">Legal</a>
-                <a href="#">Membership</a>
-            </div>
-            <div class="buttons">
-                <button>Small Screen</button>
-                <button>Full Screen</button>
-            </div>
-			 <div class="links">
-                <a href="#">Log out</a>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="game-wrapper">
-            <div id="openfl-content"></div>
-        </div>
-    </div>
+	
+	<div id="openfl-content"></div>
+	
 	<script type="text/javascript">
 		lime.embed ("CP", "openfl-content", 1440, 900, { parameters: {} });
 	</script>
+	
 </body>
 </html>

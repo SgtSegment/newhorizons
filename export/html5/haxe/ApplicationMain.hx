@@ -35,7 +35,7 @@ class ApplicationMain
 		ManifestResources.init(config);
 		#end
 
-		app.meta["build"] = "158";
+		app.meta["build"] = "6";
 		app.meta["company"] = "WGP";
 		app.meta["file"] = "CP";
 		app.meta["name"] = "Club Penguin Chat";
