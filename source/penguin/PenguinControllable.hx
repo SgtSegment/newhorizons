@@ -10,6 +10,10 @@ class PenguinControllable extends Penguin {
     private var circleSprite: FlxSprite;
     private var clickCollisionSprite: FlxSprite;
 
+    // Mouse state.
+    private var lastMousePos: FlxPoint;
+    private var usingCachedMousePos: Bool;
+
     // Constructor.
     override public function new(X: Float, Y: Float) {
         if (sprites == null) sprites = new Array<FlxSprite>();
@@ -36,7 +40,10 @@ class PenguinControllable extends Penguin {
 
     // Action setters.
     override public function setIdle(direction: CardinalDirection) {
-        targetSprite.visible = false;
+        targetSprite.visible = false; // TODO(mvh): Also handle the cases where the walk is interupted rather than just ending.
+
+        lastMousePos = FlxPoint.get(FlxG.mouse.x, FlxG.mouse.y);
+        usingCachedMousePos = true;
 
         super.setIdle(direction);
     }
@@ -56,12 +63,48 @@ class PenguinControllable extends Penguin {
         }
     }
 
+    // Action updates.
+    override private function updateIdle(elapsed: Float, direction: CardinalDirection): Void {
+        if (actionJustChanged == true) {
+            super.updateIdle(elapsed, direction);
+            return;
+        }
+
+        final maxMouseDistance: Float = 150;
+
+        final mouseMoveDelta: FlxPoint = FlxPoint.get(
+            FlxG.mouse.x - lastMousePos.x,
+            FlxG.mouse.y - lastMousePos.y);
+        final mouseMoveDistance: Float = Math.sqrt(
+            mouseMoveDelta.x * mouseMoveDelta.x
+          + mouseMoveDelta.y * mouseMoveDelta.y);
+
+        final mouseDelta: FlxPoint = FlxPoint.get(
+            FlxG.mouse.x - (penguinSprite.x + penguinSprite.width / 2),
+            FlxG.mouse.y - (penguinSprite.y + penguinSprite.height / 2.75));
+        final mouseAngle: Float = Math.atan2(mouseDelta.y, mouseDelta.x) * (180 / Math.PI);
+
+        if (usingCachedMousePos == false || mouseMoveDistance > maxMouseDistance) {
+            usingCachedMousePos = false;
+            super.updateIdle(elapsed, angleToDirection(mouseAngle));
+            return;
+        }
+
+        super.updateIdle(elapsed, direction);
+
+    }
+
     // Handle keyboard input.
     private function handleInput(): Void {
         if (FlxG.keys.justPressed.W) setWaving();
         if (FlxG.keys.justPressed.S) setSitting(North);
         if (FlxG.keys.justPressed.D) setDancing();
         if (FlxG.mouse.justPressed) setMoving(FlxG.mouse.x, FlxG.mouse.y);
+
+        if (FlxG.keys.justPressed.UP) setSitting(South); // Why is up south?
+        if (FlxG.keys.justPressed.DOWN) setSitting(North); // Why is down north?
+        if (FlxG.keys.justPressed.LEFT) setSitting(West);
+        if (FlxG.keys.justPressed.RIGHT) setSitting(East);
     }
 
     // Load the target sprite related stuff.
@@ -88,6 +131,6 @@ class PenguinControllable extends Penguin {
         clickCollisionSprite.loadGraphic("assets/images/player/collision.png");
         clickCollisionSprite.centerOrigin();
         clickCollisionSprite.visible = true;
-        addSprite(clickCollisionSprite);
+        //addSprite(clickCollisionSprite);
     }
 }
