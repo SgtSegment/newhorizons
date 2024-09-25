@@ -78,27 +78,22 @@ class Penguin {
 
     // Action setters.
     public function setIdle(direction: CardinalDirection) {
-        trace('Idle');
         currentAction = Idle(direction);
         actionJustChanged = true;
     }
     public function setMoving(goalX: Float, goalY: Float) {
-        trace('Moving');
         currentAction = Moving(FlxPoint.get(goalX, goalY));
         actionJustChanged = true;
     }
     public function setSitting(direction: CardinalDirection) {
-        trace('Sitting');
         currentAction = Sitting(direction);
         actionJustChanged = true;
     }
     public function setDancing() {
-        trace('Dancing');
         currentAction = Dancing;
         actionJustChanged = true;
     }
     public function setWaving(waveTimer: Float = 0) {
-        trace('Waving');
         currentAction = Waving(waveTimer);
         actionJustChanged = true;
     }

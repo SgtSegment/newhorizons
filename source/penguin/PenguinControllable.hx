@@ -100,6 +100,11 @@ class PenguinControllable extends Penguin {
         if (FlxG.keys.justPressed.S) setSitting(North);
         if (FlxG.keys.justPressed.D) setDancing();
         if (FlxG.mouse.justPressed) setMoving(FlxG.mouse.x, FlxG.mouse.y);
+
+        if (FlxG.keys.justPressed.UP) setSitting(South); // Why is up south?
+        if (FlxG.keys.justPressed.DOWN) setSitting(North); // Why is down north?
+        if (FlxG.keys.justPressed.LEFT) setSitting(West);
+        if (FlxG.keys.justPressed.RIGHT) setSitting(East);
     }
 
     // Load the target sprite related stuff.
