@@ -40,9 +40,11 @@ class Penguin {
     // Constructor
     public function new(X: Float = 0, Y: Float = 0) {
         if (sprites == null) sprites = new Array<FlxSprite>();
-        setIdle(South);
+
         loadPenguinSprite(X, Y);
         loadPenguinName();
+
+        setIdle(North);
     }
 
     // General updates.
@@ -103,17 +105,16 @@ class Penguin {
 
     // Action updates.
     private function updateIdle(elapsed: Float, direction: CardinalDirection): Void {
-        // TODO(mvh): Mouse spin. (Spin the penguin based on mouse input... though this should maybe be done in PenguinController.
-            switch (direction) {
-                case North:     penguinSprite.animation.play("idle_N");
-                case NorthEast: penguinSprite.animation.play("idle_NE");
-                case East:      penguinSprite.animation.play("idle_E");
-                case SouthEast: penguinSprite.animation.play("idle_SE");
-                case South:     penguinSprite.animation.play("idle_S");
-                case SouthWest: penguinSprite.animation.play("idle_SW");
-                case West:      penguinSprite.animation.play("idle_W");
-                case NorthWest: penguinSprite.animation.play("idle_NW");
-            }
+        switch (direction) {
+            case North:     penguinSprite.animation.play("idle_N");
+            case NorthEast: penguinSprite.animation.play("idle_NE");
+            case East:      penguinSprite.animation.play("idle_E");
+            case SouthEast: penguinSprite.animation.play("idle_SE");
+            case South:     penguinSprite.animation.play("idle_S");
+            case SouthWest: penguinSprite.animation.play("idle_SW");
+            case West:      penguinSprite.animation.play("idle_W");
+            case NorthWest: penguinSprite.animation.play("idle_NW");
+        }
     }
     private function updateMoving(elapsed: Float, goal: FlxPoint): Void {
         var direction: FlxPoint = FlxPoint.get(goal.x - penguinSprite.x, goal.y - penguinSprite.y);
@@ -224,7 +225,6 @@ class Penguin {
 
         penguinSprite.animation.addByPrefix("dance", "4_dance", 13, true); 
 
-        penguinSprite.animation.play("idle_N");
         penguinSprite.centerOrigin();
         penguinSprite.screenCenter();
 
