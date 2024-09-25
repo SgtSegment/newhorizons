@@ -1,0 +1,76 @@
+[
+    {
+        "name": "background03",
+        "path": "assets/images/rooms/town/03.png",
+        "visible": true,
+        "centered": true,
+        "centeredWidth": 2,
+        "centeredHeight": 1.13,
+        "x": 594,
+        "y": 244
+    },
+    {
+        "name": "background04",
+        "path": "assets/images/rooms/town/04.png",
+        "visible": true,
+        "centered": true,
+        "x": 858,
+        "y": 269
+    },
+    {
+        "name": "background02",
+        "path": "assets/images/rooms/town/02.png",
+        "visible": true,
+        "centered": true,
+        "x": 764,
+        "y": 430
+    },
+    {
+        "name": "beta",
+        "path": "assets/images/rooms/town/beta.png",
+        "visible": true,
+        "centered": true,
+        "x": 188,
+        "y": 56
+    },
+    {
+        "name": "background05",
+        "path": "assets/images/rooms/town/05.png",
+        "visible": true,
+        "centered": true,
+        "centeredWidth": 2,
+        "centeredHeight": 2.5,
+        "x": 382,
+        "y": 413
+    },
+    {
+        "name": "background07",
+        "path": "assets/images/rooms/town/07.png",
+        "visible": true,
+        "centered": true,
+        "centeredWidth": 2,
+        "centeredHeight": 2.3,
+        "x": 322,
+        "y": 452
+    },
+    {
+        "name": "background08",
+        "path": "assets/images/rooms/town/08.png",
+        "visible": true,
+        "centered": true,
+        "centeredWidth": 2,
+        "centeredHeight": 1.6,
+        "x": 420,
+        "y": 420
+    },
+    {
+        "name": "background06",
+        "path": "assets/images/rooms/town/06.png",
+        "visible": true,
+        "centered": true,
+        "centeredWidth": 2,
+        "centeredHeight": 1.6,
+        "x": 377,
+        "y": 465
+    }
+]

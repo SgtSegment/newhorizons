@@ -1,0 +1,35 @@
+[
+    {
+        "name": "tempInteractiveUI",
+        "path": "assets/images/interface_temp.png",
+        "x": 0,
+        "y": 0
+    },
+    {
+        "name": "uiCorner1",
+        "path": "assets/images/corner.png",
+        "x": -1,
+        "y": -1
+    },
+    {
+        "name": "uiCorner2",
+        "path": "assets/images/corner.png",
+        "angle": 90,
+        "x": 1425,
+        "y": -1
+    },
+    {
+        "name": "uiCorner3",
+        "path": "assets/images/corner.png",
+        "angle": 270,
+        "x": -1,
+        "y": 885
+    },
+    {
+        "name": "uiCorner4",
+        "path": "assets/images/corner.png",
+        "angle": 180,
+        "x": 1425,
+        "y": 885
+    }
+]
