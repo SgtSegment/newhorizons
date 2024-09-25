@@ -37,10 +37,9 @@
         "name": "background05",
         "path": "assets/images/rooms/town/05.png",
         "visible": true,
-        "centered": {
-            "width": 2,
-            "height": 2.5
-        },
+        "centered": true,
+        "centeredWidth": 2,
+        "centeredHeight": 2.5,
         "x": 382,
         "y": 413
     },
