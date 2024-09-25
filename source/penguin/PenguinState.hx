@@ -1,0 +1,6 @@
+package penguin;
+
+class PenguinState
+{
+	
+}
