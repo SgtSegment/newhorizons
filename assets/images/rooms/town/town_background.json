@@ -1,0 +1,29 @@
+[
+    {
+        "name": "background00a",
+        "path": "assets/images/rooms/sky00a.png",
+        "visible": false,
+        "x": 0,
+        "y": 0
+    },
+    {
+        "name": "background00b",
+        "path": "assets/images/rooms/sky00b.png",
+        "visible": false,
+        "x": 0,
+        "y": 0
+    },
+    {
+        "name": "background00",
+        "path": "assets/images/rooms/town/00.png",
+        "visible": true,
+        "x": 0,
+        "y": 0
+    },
+    {
+        "name": "background01",
+        "path": "assets/images/rooms/town/01.png",
+        "x": 0,
+        "y": 0
+    }
+]
